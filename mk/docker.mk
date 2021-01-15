@@ -15,7 +15,7 @@
 
 # Supported OSs by architecture
 AMD64_TARGETS := ubuntu20.04 ubuntu18.04 ubuntu16.04 debian10 debian9
-X86_64_TARGETS := centos7 centos8 rhel7 rhel8 amazonlinux1 amazonlinux2 opensuse-leap15.1
+X86_64_TARGETS := centos7 centos8 rhel7 rhel8 amazonlinux1 amazonlinux2 opensuse-leap15.1 fedora33
 PPC64LE_TARGETS := ubuntu18.04 ubuntu16.04 centos7 centos8 rhel7 rhel8
 ARM64_TARGETS := ubuntu18.04
 AARCH64_TARGETS := centos8 rhel8
@@ -109,6 +109,11 @@ docker-amd64-verify: $(patsubst %, %-verify, $(AMD64_TARGETS)) \
 --centos%: OS := centos
 --centos8%: CFLAGS := -I/usr/include/tirpc
 --centos8%: LDLIBS := -ltirpc
+
+# private fedora target with overrides
+--fedora%: OS := fedora
+--fedora33%: CFLAGS := -I/usr/include/tirpc
+--fedora33%: LDLIBS := -ltirpc
 
 # private opensuse-leap target with overrides
 --opensuse-leap%: OS := opensuse-leap
